@@ -3,379 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Дорогами памяти — Молодёжный исторический марафон</title>
 
     <style>
+        :root {
+            --burgundy-dark: #4a1020;
+            --burgundy-deep: #2d0712;
+            --burgundy-main: #7a263c;
+            --burgundy-light: #b85c73;
+            --burgundy-pale: #f6e8ec;
+
+            --white: #ffffff;
+            --gray-light: #faf5f6;
+            --gray-text: #4a3940;
+
+            --shadow: 0 4px 25px rgba(45, 7, 18, 0.12);
+            --radius: 12px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --blue-dark: #4a0e1c;
-            --blue-deep: #2b0710;
-            --blue-main: #7a1f35;
-            --blue-light: #b85c72;
-            --blue-pale: #f8e9ed;
-            --white: #ffffff;
-            --gray-light: #fbf5f6;
-            --gray-text: #4a3439;
-            --shadow: 0 4px 25px rgba(74, 14, 28, 0.12);
-            --radius: 12px;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             color: var(--gray-text);
-            background-color: var(--white);
+            background: var(--white);
             line-height: 1.6;
-            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
         }
 
         a {
-            text-decoration: none;
             color: inherit;
+            text-decoration: none;
         }
 
         .container {
-            max-width: 1200px;
+            width: min(1180px, 92%);
             margin: 0 auto;
-            padding: 0 20px;
         }
 
-        h1, h2, h3, h4 {
-            color: var(--blue-dark);
-            font-weight: 700;
-            line-height: 1.2;
-            font-family: 'Georgia', 'Times New Roman', serif;
-            letter-spacing: 0.5px;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-        }
-
-        h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            color: #5a454a;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .section-title h2 {
-            display: inline-block;
-            position: relative;
-            padding-bottom: 18px;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 2px;
-            background: var(--blue-main);
-            border-radius: 2px;
-        }
-
-        /* ==============================
-           КНОПКИ
-        ============================== */
-
-        .btn {
-            display: inline-block;
-            padding: 14px 36px;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-primary {
-            background: var(--blue-dark);
-            color: var(--white);
-            border-color: var(--blue-dark);
-        }
-
-        .btn-primary:hover {
-            background: var(--blue-main);
-            border-color: var(--blue-main);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(74, 14, 28, 0.3);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--blue-dark);
-            border-color: var(--blue-dark);
-        }
-
-        .btn-outline:hover {
-            background: var(--blue-dark);
-            color: var(--white);
-            transform: translateY(-2px);
-        }
-
-        .btn-white {
-            background: var(--white);
-            color: var(--blue-dark);
-            border-color: var(--white);
-        }
-
-        .btn-white:hover {
-            background: var(--blue-pale);
-            transform: translateY(-2px);
-        }
-
-        /* ==============================
-           ШАПКА
-        ============================== */
+        /* ================= HEADER ================= */
 
         header {
-            background: var(--blue-deep);
-            padding: 18px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            background: var(--burgundy-deep);
+            color: var(--white);
+            box-shadow: 0 3px 15px rgba(45, 7, 18, 0.25);
         }
 
         .header-inner {
+            min-height: 76px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 800;
+            letter-spacing: .5px;
+            white-space: nowrap;
+        }
+
+        .logo-mark {
+            width: 42px;
+            height: 42px;
+            border: 2px solid rgba(255,255,255,.75);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
         }
 
         .logo-text {
-            font-family: 'Georgia', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            line-height: 1.2;
-            color: var(--white);
-        }
-
-        .logo-text span {
-            color: var(--blue-light);
-        }
-
-        nav ul {
             display: flex;
-            list-style: none;
-            gap: 25px;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .logo-title {
+            font-size: 18px;
+        }
+
+        .logo-subtitle {
+            font-size: 11px;
+            opacity: .7;
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
+        nav {
+            display: flex;
             align-items: center;
+            gap: 26px;
         }
 
-        nav ul li a {
-            color: rgba(255,255,255,0.8);
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: color 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        nav a {
+            color: rgba(255,255,255,.9);
+            font-size: 14px;
+            transition: .25s ease;
         }
 
-        nav ul li a:hover {
-            color: var(--white);
+        nav a:hover {
+            color: #f0c7d1;
         }
 
-        .dropdown {
+        .contacts-menu {
             position: relative;
         }
 
-        .dropdown-toggle {
+        .contacts-button {
+            border: 1px solid rgba(255,255,255,.3);
+            background: transparent;
+            color: white;
+            padding: 9px 15px;
+            border-radius: 8px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            font-size: 14px;
         }
 
-        .dropdown-toggle::after {
-            content: '▾';
-            font-size: 0.7rem;
-            transition: transform 0.3s;
-        }
-
-        .dropdown:hover .dropdown-toggle::after {
-            transform: rotate(180deg);
-        }
-
-        .dropdown-menu {
+        .contacts-dropdown {
             position: absolute;
-            top: 100%;
+            top: calc(100% + 10px);
             right: 0;
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: 0 10px 30px rgba(74, 14, 28, 0.2);
-            padding: 20px;
-            min-width: 300px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            z-index: 1001;
+            min-width: 250px;
+            background: white;
+            color: var(--gray-text);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 18px;
+            display: none;
         }
 
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-menu h4 {
-            color: var(--blue-dark);
-            font-size: 0.95rem;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--blue-pale);
-            font-family: 'Georgia', serif;
-        }
-
-        .dropdown-menu .contact-item {
-            margin-bottom: 12px;
-        }
-
-        .dropdown-menu .contact-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .dropdown-menu .contact-name {
-            font-weight: 700;
-            color: var(--blue-dark);
-            font-size: 0.9rem;
+        .contacts-menu:hover .contacts-dropdown {
             display: block;
-            margin-bottom: 3px;
         }
 
-        .dropdown-menu .contact-role {
-            font-size: 0.8rem;
-            color: #806b70;
-            display: block;
-            margin-bottom: 3px;
+        .contacts-dropdown p {
+            margin-bottom: 8px;
         }
 
-        .dropdown-menu .contact-link {
-            font-size: 0.85rem;
-            color: var(--blue-main);
-            display: block;
-            transition: color 0.3s;
-        }
-
-        .dropdown-menu .contact-link:hover {
-            color: var(--blue-dark);
-            text-decoration: underline;
-        }
-
-        /* ==============================
-           HERO
-        ============================== */
+        /* ================= HERO ================= */
 
         .hero {
-            position: relative;
             min-height: 680px;
+            position: relative;
             display: flex;
             align-items: center;
-            color: var(--white);
+            overflow: hidden;
 
             background-image:
                 linear-gradient(
                     90deg,
-                    rgba(43, 7, 16, 0.96) 0%,
-                    rgba(70, 10, 25, 0.91) 25%,
-                    rgba(86, 17, 35, 0.72) 48%,
-                    rgba(86, 17, 35, 0.34) 72%,
-                    rgba(86, 17, 35, 0.16) 100%
+                    rgba(45, 7, 18, 0.96) 0%,
+                    rgba(61, 10, 26, 0.91) 25%,
+                    rgba(74, 16, 32, 0.72) 48%,
+                    rgba(74, 16, 32, 0.34) 72%,
+                    rgba(74, 16, 32, 0.16) 100%
                 ),
                 url("https://avatars.mds.yandex.net/get-weather/10145165/jZnQkjhTKBYSaNcuyyRN/orig");
 
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            overflow: hidden;
         }
 
         .hero::before {
-            content: '';
+            content: "";
             position: absolute;
             inset: 0;
             background:
                 linear-gradient(
                     180deg,
-                    rgba(43, 7, 16, 0.25) 0%,
-                    transparent 35%,
-                    rgba(43, 7, 16, 0.25) 100%
+                    rgba(45, 7, 18, .25),
+                    rgba(45, 7, 18, .35)
                 );
             pointer-events: none;
         }
 
-        .hero .container {
+        .hero-content {
             position: relative;
             z-index: 2;
-            width: 100%;
+            width: 66%;
+            color: white;
+            padding: 90px 0;
         }
 
-        .hero-content {
-            max-width: 800px;
-            padding: 50px 0;
-        }
-
-        .hero-label {
-            display: inline-block;
-            background: rgba(255,255,255,0.10);
-            border: 1px solid rgba(255,255,255,0.35);
-            padding: 9px 22px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
+        .hero-kicker {
+            font-size: 14px;
             text-transform: uppercase;
-            margin-bottom: 25px;
-            backdrop-filter: blur(5px);
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+            color: #f0c7d1;
+            font-weight: 700;
         }
 
         .hero h1 {
-            color: var(--white);
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            margin-bottom: 18px;
-            font-family: 'Georgia', serif;
-            line-height: 1.05;
-            letter-spacing: 5px;
-            text-shadow: 0 3px 15px rgba(0,0,0,0.3);
+            font-size: clamp(3.2rem, 7vw, 6.8rem);
+            line-height: .95;
+            margin-bottom: 28px;
+            letter-spacing: -3px;
+            font-weight: 900;
+        }
+
+        .hero-description {
+            max-width: 820px;
+            font-size: 1.25rem;
+            line-height: 1.65;
+            color: rgba(255,255,255,.9);
+            margin-bottom: 28px;
         }
 
         .hero-meta {
             font-size: 1.35rem;
+            color: #ffffff;
             margin-bottom: 25px;
             font-weight: 600;
             letter-spacing: 1px;
@@ -383,106 +241,179 @@
             background: linear-gradient(
                 90deg,
                 #ffffff 0%,
-                #f0c5ce 45%,
+                #f0c7d1 45%,
                 #ffffff 100%
             );
+
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-description {
-            max-width: 750px;
-        }
-
-        .hero-description p {
-            color: rgba(255,255,255,0.92);
-            font-size: 1.08rem;
-            margin-bottom: 12px;
-        }
-
         .hero-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 32px;
+            gap: 14px;
+            margin-top: 30px;
         }
 
-        /* ==============================
-           ОБЩИЕ СЕКЦИИ
-        ============================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .25s ease;
+            border: none;
+            font-size: 15px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--burgundy-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,.55);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,.1);
+        }
+
+        /* ================= SECTIONS ================= */
 
         section {
-            padding: 80px 0;
+            padding: 90px 0;
         }
 
-        .bg-light {
+        section:nth-of-type(even) {
             background: var(--gray-light);
         }
 
-        .bg-blue {
-            background: var(--blue-dark);
-            color: var(--white);
+        .section-title {
+            margin-bottom: 45px;
         }
 
-        .bg-blue h2,
-        .bg-blue h3,
-        .bg-blue h4 {
-            color: var(--white);
+        .section-title span {
+            display: block;
+            color: var(--burgundy-main);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 800;
+            margin-bottom: 8px;
         }
 
-        .bg-blue p {
-            color: rgba(255,255,255,0.9);
+        .section-title h2 {
+            color: var(--burgundy-dark);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            line-height: 1.1;
         }
 
-        .grid-2 {
+        .section-title p {
+            max-width: 760px;
+            margin-top: 15px;
+            color: #6b5960;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            align-items: start;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 60px;
+            align-items: center;
         }
+
+        .about-text p {
+            margin-bottom: 18px;
+            font-size: 17px;
+        }
+
+        .about-highlight {
+            background: var(--burgundy-dark);
+            color: white;
+            padding: 35px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .about-highlight strong {
+            display: block;
+            font-size: 2.5rem;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .about-highlight span {
+            opacity: .8;
+        }
+
+        /* ================= GOALS ================= */
 
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .grid-4 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
         }
 
-        /* ==============================
-           КАРТОЧКИ
-        ============================== */
-
         .card {
-            background: var(--white);
+            background: white;
             border-radius: var(--radius);
             padding: 30px;
             box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 3px solid var(--blue-dark);
+            height: 100%;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(74, 14, 28, 0.15);
-        }
-
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--blue-pale);
+        .card-number {
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
+            background: var(--burgundy-pale);
+            color: var(--burgundy-main);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            color: var(--blue-dark);
+            font-weight: 800;
+            margin-bottom: 22px;
+        }
+
+        .card h3 {
+            color: var(--burgundy-dark);
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #685960;
+        }
+
+        /* ================= PARTICIPANTS ================= */
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+        }
+
+        .grid-2 h3 {
+            color: var(--burgundy-dark);
+            font-size: 25px;
+            margin-bottom: 18px;
+        }
+
+        .grid-2 p {
+            margin-bottom: 18px;
         }
 
         .goal-list {
@@ -490,527 +421,545 @@
         }
 
         .goal-list li {
-            padding: 12px 0 12px 35px;
             position: relative;
-            border-bottom: 1px solid var(--blue-pale);
-        }
-
-        .goal-list li:last-child {
-            border-bottom: none;
+            padding-left: 30px;
+            margin-bottom: 14px;
         }
 
         .goal-list li::before {
-            content: '—';
+            content: "✓";
             position: absolute;
             left: 0;
-            top: 12px;
-            color: var(--blue-main);
-            font-weight: bold;
-            font-size: 1.1rem;
+            top: 0;
+            color: var(--burgundy-main);
+            font-weight: 900;
         }
 
-        .why-nn {
-            margin-top: 40px;
-            padding: 30px;
-            background: var(--blue-pale);
-            border-radius: var(--radius);
-            border-left: 4px solid var(--blue-dark);
-        }
+        /* ================= DATE / PLACE ================= */
 
-        .why-nn h3 {
-            color: var(--blue-dark);
-            margin-bottom: 15px;
-        }
-
-        .why-nn p {
-            margin-bottom: 0;
-        }
-
-        /* ==============================
-           ГОРЬКИЙ В ГОДЫ ВОЙНЫ
-        ============================== */
-
-        .war-history {
-            margin-top: 28px;
-        }
-
-        .war-history-title {
-            margin-bottom: 18px;
-            color: var(--blue-dark);
-            font-family: 'Georgia', serif;
-            font-size: 1.25rem;
-        }
-
-        .war-history-grid {
+        .date-place {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
         }
 
-        .war-history-card {
-            position: relative;
-            height: 190px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 18px rgba(74, 14, 28, 0.15);
-            background: var(--blue-dark);
+        .date-card {
+            padding: 40px;
+            border-radius: var(--radius);
+            background: var(--burgundy-dark);
+            color: white;
+            min-height: 220px;
         }
 
-        .war-history-card img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        .date-card.light {
+            background: var(--burgundy-pale);
+            color: var(--burgundy-dark);
         }
 
-        .war-history-card:hover img {
-            transform: scale(1.06);
+        .date-card .label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            opacity: .7;
+            margin-bottom: 14px;
         }
 
-        .war-history-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                180deg,
-                rgba(43, 7, 16, 0.02) 30%,
-                rgba(43, 7, 16, 0.68) 100%
-            );
-            pointer-events: none;
+        .date-card h3 {
+            font-size: 32px;
+            margin-bottom: 12px;
         }
 
-        .war-history-caption {
-            position: absolute;
-            left: 15px;
-            right: 15px;
-            bottom: 13px;
-            z-index: 2;
-            color: #fff;
-            font-size: 0.9rem;
-            font-weight: 600;
-            line-height: 1.3;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-        }
-
-        /* ==============================
-           МАРШРУТ — ФОТОКАРТОЧКИ
-        ============================== */
+        /* ================= ROUTE ================= */
 
         .route-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
         .route-card {
-            position: relative;
-            min-height: 390px;
-            border-radius: 16px;
+            background: white;
+            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 10px 35px rgba(74, 14, 28, 0.18);
-            background: var(--blue-dark);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: var(--shadow);
+            transition: .3s ease;
         }
 
         .route-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 45px rgba(74, 14, 28, 0.28);
+            transform: translateY(-5px);
         }
 
-        .route-card-image {
-            position: absolute;
-            inset: 0;
+        .route-image {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .route-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: .4s ease;
         }
 
-        .route-card:hover .route-card-image {
-            transform: scale(1.06);
+        .route-card:hover img {
+            transform: scale(1.04);
         }
 
-        .route-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                180deg,
-                rgba(43, 7, 16, 0.02) 10%,
-                rgba(43, 7, 16, 0.18) 35%,
-                rgba(43, 7, 16, 0.92) 100%
-            );
+        .route-content {
+            padding: 22px;
         }
 
-        .route-card-content {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 2;
-            padding: 30px;
+        .route-content span {
+            display: block;
+            color: var(--burgundy-main);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .route-content h3 {
+            color: var(--burgundy-dark);
+            font-size: 21px;
+            margin-bottom: 8px;
+        }
+
+        .route-content p {
+            font-size: 14px;
+            color: #6b5960;
+        }
+
+        /* ================= HISTORY ================= */
+
+        .war-history {
+            margin-top: 60px;
+            background: var(--burgundy-dark);
             color: white;
-        }
-
-        .route-number {
-            display: inline-flex;
-            width: 38px;
-            height: 38px;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.16);
-            border: 1px solid rgba(255,255,255,0.35);
-            font-weight: 700;
-            margin-bottom: 14px;
-            backdrop-filter: blur(5px);
-        }
-
-        .route-card h3 {
-            color: white;
-            font-size: 1.7rem;
-            margin-bottom: 10px;
-        }
-
-        .route-card p {
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 0;
-            font-size: 0.96rem;
-            line-height: 1.55;
-        }
-
-        /* ==============================
-           ПРОГРАММА
-        ============================== */
-
-        .day-block {
-            background: var(--white);
+            padding: 45px;
             border-radius: var(--radius);
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
-            border-left: 4px solid var(--blue-dark);
         }
 
-        .day-block h3 {
-            color: var(--blue-dark);
-            border-bottom: 1px solid var(--blue-pale);
-            padding-bottom: 12px;
-            margin-bottom: 20px;
+        .war-history h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .war-history > p {
+            max-width: 800px;
+            opacity: .85;
+            margin-bottom: 30px;
+        }
+
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .history-photo {
+            height: 240px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .history-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ================= PROGRAM ================= */
+
+        .program {
+            display: grid;
+            gap: 25px;
+        }
+
+        .program-day {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .day-header {
+            background: var(--burgundy-dark);
+            color: white;
+            padding: 22px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .day-header h3 {
+            font-size: 23px;
+        }
+
+        .day-header span {
+            opacity: .75;
+            font-size: 14px;
+        }
+
+        .day-content {
+            padding: 10px 28px 25px;
         }
 
         .day-item {
-            display: flex;
-            gap: 15px;
-            padding: 12px 0;
-            border-bottom: 1px dashed var(--blue-pale);
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            gap: 20px;
+            padding: 17px 0;
+            border-bottom: 1px solid #eee3e6;
         }
 
         .day-item:last-child {
             border-bottom: none;
         }
 
-        .day-item .time {
-            font-weight: 700;
-            color: var(--blue-main);
-            min-width: 100px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
+        .time {
+            font-weight: 800;
+            color: var(--burgundy-main);
         }
 
-        /* ==============================
-           ФОРМА
-        ============================== */
+        /* ================= FEATURES ================= */
 
-        .reg-form-box {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--white);
-            padding: 40px;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .feature {
+            padding: 28px;
+            background: white;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            border-top: 4px solid var(--blue-dark);
         }
 
-        .reg-form-box .form-group {
+        .feature-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: var(--burgundy-pale);
+            color: var(--burgundy-main);
+            font-size: 20px;
+            margin-bottom: 17px;
+        }
+
+        .feature h3 {
+            color: var(--burgundy-dark);
+            margin-bottom: 8px;
+        }
+
+        /* ================= REGISTRATION ================= */
+
+        .registration {
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--burgundy-dark),
+                    var(--burgundy-main)
+                );
+            color: white;
+        }
+
+        .registration .section-title h2,
+        .registration .section-title span {
+            color: white;
+        }
+
+        .registration-grid {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .registration-info p {
+            color: rgba(255,255,255,.82);
             margin-bottom: 20px;
         }
 
-        .reg-form-box label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--blue-dark);
-            font-size: 0.95rem;
+        .registration-info ul {
+            list-style: none;
         }
 
-        .reg-form-box input,
-        .reg-form-box textarea {
-            width: 100%;
-            display: block;
-            padding: 12px 16px;
-            border: 2px solid var(--blue-pale);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            background: var(--white);
+        .registration-info li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .registration-info li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #f0c7d1;
+        }
+
+        .form {
+            background: white;
             color: var(--gray-text);
+            border-radius: var(--radius);
+            padding: 35px;
+            box-shadow: 0 15px 45px rgba(45,7,18,.2);
         }
 
-        .reg-form-box input:focus,
-        .reg-form-box textarea:focus {
-            outline: none;
-            border-color: var(--blue-main);
-            box-shadow: 0 0 0 3px rgba(122, 31, 53, 0.15);
+        .form-group {
+            margin-bottom: 18px;
         }
 
-        .reg-form-box textarea {
-            resize: vertical;
-            min-height: 100px;
+        .form label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--burgundy-dark);
         }
 
-        .reg-form-box .btn {
+        .form input,
+        .form select,
+        .form textarea {
             width: 100%;
-            margin-top: 10px;
-            padding: 16px;
+            border: 1px solid #dccbd0;
+            border-radius: 7px;
+            padding: 12px 14px;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+            transition: .2s ease;
+            background: white;
         }
 
-        .reg-form-box .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        .form textarea {
+            min-height: 110px;
+            resize: vertical;
         }
 
-        /* ==============================
-           КОНТАКТЫ
-        ============================== */
+        .form input:focus,
+        .form select:focus,
+        .form textarea:focus {
+            border-color: var(--burgundy-main);
+            box-shadow: 0 0 0 3px rgba(122,38,60,.1);
+        }
+
+        .form .btn {
+            width: 100%;
+            background: var(--burgundy-dark);
+            color: white;
+            margin-top: 5px;
+        }
+
+        .form .btn:hover {
+            background: var(--burgundy-main);
+        }
+
+        .form-status {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* ================= CONTACTS ================= */
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
 
         .contact-card {
-            background: var(--white);
-            border-radius: var(--radius);
             padding: 30px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            border-top: 3px solid var(--blue-dark);
-        }
-
-        .contact-card h4 {
-            color: var(--blue-dark);
-            margin-bottom: 10px;
-            font-family: 'Georgia', serif;
-        }
-
-        .contact-card .role {
-            font-size: 0.9rem;
-            color: #806b70;
-            margin-bottom: 15px;
-        }
-
-        .contact-card .contact-link {
-            display: block;
-            color: var(--blue-main);
-            font-weight: 600;
-            margin-bottom: 5px;
-            transition: color 0.3s;
-        }
-
-        .contact-card .contact-link:hover {
-            color: var(--blue-dark);
-            text-decoration: underline;
-        }
-
-        .email-box {
-            background: var(--blue-pale);
+            background: var(--gray-light);
             border-radius: var(--radius);
-            padding: 25px;
-            text-align: center;
-            margin-top: 25px;
         }
 
-        .email-box p {
-            margin-bottom: 8px;
-            color: var(--blue-dark);
+        .contact-card h3 {
+            color: var(--burgundy-dark);
+            margin-bottom: 10px;
+        }
+
+        .contact-card a {
+            color: var(--burgundy-main);
             font-weight: 600;
         }
 
-        .email-box a {
-            font-size: 1.1rem;
-            color: var(--blue-main);
-            font-weight: 700;
-            transition: color 0.3s;
-        }
-
-        .email-box a:hover {
-            color: var(--blue-dark);
-            text-decoration: underline;
-        }
-
-        /* ==============================
-           FOOTER
-        ============================== */
+        /* ================= FOOTER ================= */
 
         footer {
-            background: var(--blue-deep);
-            color: rgba(255,255,255,0.8);
-            padding: 50px 0 30px;
+            background: var(--burgundy-deep);
+            color: white;
+            padding: 45px 0 25px;
         }
 
-        .footer-inner {
+        .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 50px;
+            padding-bottom: 35px;
+            border-bottom: 1px solid rgba(255,255,255,.12);
         }
 
-        footer h4 {
-            color: var(--white);
+        footer h3 {
             margin-bottom: 15px;
-            font-size: 1.1rem;
-            font-family: 'Georgia', serif;
+        }
+
+        footer p,
+        footer li {
+            color: rgba(255,255,255,.65);
+            font-size: 14px;
         }
 
         footer ul {
             list-style: none;
         }
 
-        footer ul li {
+        footer li {
             margin-bottom: 8px;
         }
 
-        footer ul li a {
-            color: rgba(255,255,255,0.7);
-            transition: color 0.3s;
-        }
-
-        footer ul li a:hover {
-            color: var(--white);
-        }
-
-        .footer-brand {
-            font-family: 'Georgia', serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--white);
-            margin-bottom: 15px;
-        }
-
-        .footer-brand span {
-            color: var(--blue-light);
-        }
-
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.6);
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding-top: 22px;
+            color: rgba(255,255,255,.45);
+            font-size: 13px;
         }
 
-        /* ==============================
-           АДАПТИВ
-        ============================== */
+        /* ================= RESPONSIVE ================= */
 
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
+
+            nav {
+                gap: 14px;
+            }
+
+            .hero-content {
+                width: 78%;
+            }
 
             .route-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-3 {
                 grid-template-columns: 1fr;
             }
 
-            .war-history-grid {
+            .about-grid,
+            .registration-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+
+            section {
+                padding: 65px 0;
+            }
+
+            .header-inner {
+                min-height: 65px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .contacts-button {
+                padding: 8px 11px;
             }
 
             .hero {
                 min-height: 620px;
-                background-position: 60% center;
+                background-position: 65% center;
             }
 
-            .hero::before {
-                background:
-                    linear-gradient(
-                        90deg,
-                        rgba(43, 7, 16, 0.94) 0%,
-                        rgba(70, 10, 25, 0.82) 55%,
-                        rgba(86, 17, 35, 0.35) 100%
-                    );
-            }
-        }
-
-        @media (max-width: 768px) {
-
-            h1 {
-                font-size: 1.9rem;
-                letter-spacing: 2px;
-            }
-
-            h2 {
-                font-size: 1.6rem;
-                letter-spacing: 1px;
-            }
-
-            nav ul {
-                display: none;
-            }
-
-            .logo-text {
-                font-size: 1rem;
-                letter-spacing: 2px;
-            }
-
-            .hero {
-                min-height: 650px;
-                padding: 60px 0 50px;
-                align-items: center;
-                background-position: 62% center;
+            .hero-content {
+                width: 100%;
+                padding: 70px 0;
             }
 
             .hero h1 {
-                font-size: 2.1rem;
+                font-size: 3.5rem;
+                letter-spacing: -2px;
+            }
+
+            .hero-description {
+                font-size: 1.05rem;
             }
 
             .hero-meta {
                 font-size: 1.05rem;
             }
 
-            .hero-description p {
-                font-size: 1rem;
+            .grid-2,
+            .date-place,
+            .features-grid,
+            .contacts-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
             }
 
-            section {
-                padding: 50px 0;
+            .route-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .history-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .war-history {
+                padding: 28px;
+            }
+
+            .day-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .day-item {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .logo-subtitle {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.9rem;
             }
 
             .hero-buttons {
                 flex-direction: column;
-                align-items: stretch;
             }
 
-            .hero-buttons .btn {
+            .btn {
                 width: 100%;
             }
 
-            .route-card {
-                min-height: 350px;
-            }
-
-            .route-card-content {
+            .form {
                 padding: 25px;
-            }
-
-            .war-history-card {
-                height: 220px;
-            }
-
-            .reg-form-box {
-                padding: 25px 20px;
-            }
-
-            .day-item {
-                flex-direction: column;
-                gap: 5px;
             }
         }
     </style>
@@ -1018,1275 +967,1277 @@
 
 <body>
 
-    <!-- ==============================
-         ШАПКА
-    ============================== -->
+<!-- ================= HEADER ================= -->
 
-    <header>
-        <div class="container header-inner">
+<header>
+    <div class="container header-inner">
+
+        <a href="#home" class="logo">
+            <div class="logo-mark">П</div>
 
             <div class="logo-text">
-                ДОРОГАМИ <span>ПАМЯТИ</span>
+                <div class="logo-title">ДОРОГАМИ ПАМЯТИ</div>
+                <div class="logo-subtitle">Молодёжный исторический марафон</div>
             </div>
+        </a>
 
-            <nav>
-                <ul>
-                    <li><a href="#about">О марафоне</a></li>
-                    <li><a href="#program">Программа</a></li>
-                    <li><a href="#route">Маршрут</a></li>
-                    <li><a href="#what">Что будет</a></li>
-                    <li><a href="#registration">Регистрация</a></li>
+        <nav>
+            <a href="#about">О марафоне</a>
+            <a href="#goals">Цели</a>
+            <a href="#route">Маршрут</a>
+            <a href="#program">Программа</a>
+            <a href="#registration">Регистрация</a>
+        </nav>
 
-                    <li class="dropdown">
-                        <a href="#contacts" class="dropdown-toggle">
-                            Контакты
-                        </a>
+        <div class="contacts-menu">
 
-                        <div class="dropdown-menu">
+            <button class="contacts-button">
+                Контакты
+            </button>
 
-                            <h4>Контакты организаторов</h4>
-
-                            <div class="contact-item">
-                                <span class="contact-name">Шуйкина Ксения</span>
-                                <span class="contact-role">Руководитель проекта</span>
-                                <a href="mailto:ksusasujkina@gmail.com" class="contact-link">
-                                    ksusasujkina@gmail.com
-                                </a>
-                                <a href="tel:+79535733766" class="contact-link">
-                                    8 953 573-37-66
-                                </a>
-                            </div>
-
-                            <div class="contact-item">
-                                <span class="contact-name">Ватутин Иван</span>
-                                <span class="contact-role">Наставник проекта</span>
-                                <a href="mailto:ivan51019@yandex.ru" class="contact-link">
-                                    ivan51019@yandex.ru
-                                </a>
-                                <a href="tel:+79875306003" class="contact-link">
-                                    8 987 530-60-03
-                                </a>
-                            </div>
-
-                            <div class="contact-item">
-                                <span class="contact-name">Кохан Надежда</span>
-                                <span class="contact-role">Наставник проекта</span>
-                                <a href="mailto:kokhann@yandex.ru" class="contact-link">
-                                    kokhann@yandex.ru
-                                </a>
-                            </div>
-
-                            <div class="contact-item"
-                                 style="border-top:1px solid var(--blue-pale); padding-top:12px; margin-top:12px;">
-
-                                <span class="contact-role">Общие вопросы</span>
-
-                                <a href="mailto:dorogamipamyatinn@mail.ru"
-                                   class="contact-link">
-                                    dorogamipamyatinn@mail.ru
-                                </a>
-
-                            </div>
-
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-
-        </div>
-    </header>
-
-
-    <!-- ==============================
-         HERO
-    ============================== -->
-
-    <section class="hero">
-
-        <div class="container">
-
-            <div class="hero-content">
-
-                <div class="hero-label">
-                    Молодёжный исторический марафон
-                </div>
-
-                <h1>
-                    ДОРОГАМИ ПАМЯТИ
-                </h1>
-
-                <p class="hero-meta">
-                    24–26 мая 2027 года · Нижний Новгород
-                </p>
-
-                <div class="hero-description">
-
-                    <p>
-                        Три дня, посвящённых истории Нижнего Новгорода (Горького)
-                        в годы Великой Отечественной войны, трудовому подвигу
-                        горьковчан и сохранению исторической памяти.
-                    </p>
-
-                    <p>
-                        Лекции · экскурсии · исторический квиз · квест ·
-                        командные проекты · памятные мероприятия
-                    </p>
-
-                </div>
-
-                <div class="hero-buttons">
-
-                    <a href="#about" class="btn btn-white">
-                        Узнать больше
-                    </a>
-
-                    <a href="#program"
-                       class="btn btn-outline"
-                       style="color:#fff; border-color:#fff;">
-                        Программа
-                    </a>
-
-                    <a href="#registration"
-                       class="btn btn-primary"
-                       style="background:#fff; color:#4a0e1c; border-color:#fff;">
-                        Стать участником
-                    </a>
-
-                </div>
-
+            <div class="contacts-dropdown">
+                <p><strong>Организаторы</strong></p>
+                <p>Нижегородские вузы</p>
+                <p>Нижний Новгород</p>
+                <p>24–26 мая 2027 года</p>
             </div>
 
         </div>
 
-    </section>
+    </div>
+</header>
 
 
-    <!-- ==============================
-         О МАРАФОНЕ
-    ============================== -->
+<!-- ================= HERO ================= -->
 
-    <section id="about">
+<main id="home">
 
-        <div class="container">
+<section class="hero">
 
-            <div class="section-title">
-                <h2>О марафоне</h2>
+    <div class="container">
+
+        <div class="hero-content">
+
+            <div class="hero-kicker">
+                Молодёжный исторический марафон
             </div>
 
-            <div class="grid-2">
+            <h1>
+                Дорогами<br>
+                памяти
+            </h1>
 
-                <div>
-
-                    <h3>
-                        Что такое «Дорогами памяти»?
-                    </h3>
-
-                    <p>
-                        «Дорогами памяти» — трёхдневный молодёжный исторический
-                        марафон, посвящённый истории Нижнего Новгорода (Горького)
-                        в годы Великой Отечественной войны.
-                    </p>
-
-                    <p>
-                        Марафон объединяет образовательные, экскурсионные и
-                        интерактивные форматы. Участники знакомятся с историей
-                        города не только через лекции и презентации, но и
-                        непосредственно посещают исторические и промышленные
-                        площадки Нижнего Новгорода, участвуют в командных
-                        испытаниях и памятных мероприятиях.
-                    </p>
-
-                    <h4>
-                        Главная идея
-                    </h4>
-
-                    <p>
-                        Пройти по местам, связанным с историей города, узнать
-                        больше о его роли в годы Великой Отечественной войны
-                        и сохранить память о людях, благодаря которым
-                        Нижний Новгород стал частью общей истории Победы.
-                    </p>
-
-                </div>
-
-
-                <div>
-
-                    <h3>
-                        На что направлен марафон?
-                    </h3>
-
-                    <ul class="goal-list">
-
-                        <li>
-                            <strong>Сохранение исторической памяти</strong>
-                            о событиях Великой Отечественной войны и вкладе
-                            Нижнего Новгорода.
-                        </li>
-
-                        <li>
-                            <strong>Изучение истории родного города</strong>
-                            через знакомство с историческими местами,
-                            предприятиями и памятниками.
-                        </li>
-
-                        <li>
-                            <strong>Знакомство с трудовым подвигом горьковчан</strong>
-                            и ролью города в годы войны.
-                        </li>
-
-                        <li>
-                            <strong>Патриотическое просвещение молодёжи</strong>
-                            через образовательные, командные и практические форматы.
-                        </li>
-
-                        <li>
-                            <strong>Живое обращение к истории</strong>
-                            через непосредственное посещение мест,
-                            связанных с военной историей города.
-                        </li>
-
-                    </ul>
-
-                </div>
-
+            <div class="hero-meta">
+                24–26 мая 2027 года · Нижний Новгород
             </div>
 
-
-            <div class="why-nn">
-
-                <h3>
-                    Почему именно Нижний Новгород?
-                </h3>
-
-                <p>
-                    В годы Великой Отечественной войны город Горький был одним
-                    из важных промышленных центров страны. Поэтому история
-                    города рассматривается в марафоне не только через военные
-                    события, но и через трудовой подвиг его жителей.
-                </p>
-
-
-                <!-- ГОРЬКИЙ В ГОДЫ ВОЙНЫ -->
-
-                <div class="war-history">
-
-                    <div class="war-history-title">
-                        Горький — город-труженик в годы войны
-                    </div>
-
-                    <div class="war-history-grid">
-
-                        <div class="war-history-card">
-
-                            <img
-                                src="https://a1.drive-data.ru/7782266s-1920.jpg"
-                                alt="Горький в годы Великой Отечественной войны"
-                                loading="lazy"
-                            >
-
-                            <div class="war-history-caption">
-                                Горький в годы Великой Отечественной войны
-                            </div>
-
-                        </div>
-
-
-                        <div class="war-history-card">
-
-                            <img
-                                src="https://cdn.vesti.ru/photobank/old/pic-o/214/698/5.jpg"
-                                alt="Горький военного времени"
-                                loading="lazy"
-                            >
-
-                            <div class="war-history-caption">
-                                Город в тылу: жизнь и работа горьковчан
-                            </div>
-
-                        </div>
-
-
-                        <div class="war-history-card">
-
-                            <img
-                                src="https://sun9-52.vkuserphoto.ru/s/v1/ig2/drlcRPyoF-9z8X9alCFYV0rHm-kVpokMhE0ZjAfA_XWxKPeKqHyrjlpcQJ1xaj7qCfzAvFQmXtgI4Ki6eBHiRQH3.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,807x538&from=bu&cs=640x0"
-                                alt="Горький во время Великой Отечественной войны"
-                                loading="lazy"
-                            >
-
-                            <div class="war-history-caption">
-                                Трудовой подвиг города
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==============================
-         ЦЕЛИ
-    ============================== -->
-
-    <section class="bg-light">
-
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Цели марафона</h2>
-            </div>
-
-            <div class="grid-3">
-
-                <div class="card">
-                    <div class="card-icon">🔍</div>
-                    <h4>Узнать</h4>
-                    <p>
-                        больше об истории Нижнего Новгорода в годы
-                        Великой Отечественной войны.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">👁</div>
-                    <h4>Увидеть</h4>
-                    <p>
-                        места и предприятия города, связанные
-                        с его военной историей.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">💡</div>
-                    <h4>Понять</h4>
-                    <p>
-                        значение трудового подвига горьковчан.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🗺</div>
-                    <h4>Исследовать</h4>
-                    <p>
-                        историю через экскурсии, лекции, квесты
-                        и командные задания.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🕯</div>
-                    <h4>Сохранить</h4>
-                    <p>
-                        память о событиях и людях, связанных
-                        с историей города.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">📢</div>
-                    <h4>Поделиться</h4>
-                    <p>
-                        своими знаниями и идеями в рамках
-                        презентации студенческих проектов.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==============================
-         ДЛЯ КОГО
-    ============================== -->
-
-    <section>
-
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Для кого марафон?</h2>
-            </div>
-
-            <div class="grid-2">
-
-                <div>
-
-                    <h3>
-                        Кто может стать участником?
-                    </h3>
-
-                    <p>
-                        Марафон рассчитан на студентов России и Республики
-                        Беларусь в возрасте от 18 до 25 лет.
-                    </p>
-
-                    <p>
-                        Участников ждут три дня образовательной и экскурсионной
-                        программы, командная работа, интеллектуальные испытания
-                        и знакомство с историей Нижнего Новгорода.
-                    </p>
-
-                </div>
-
-
-                <div>
-
-                    <h3>
-                        Что получает участник?
-                    </h3>
-
-                    <ul class="goal-list">
-
-                        <li>
-                            узнать больше об истории Нижнего Новгорода;
-                        </li>
-
-                        <li>
-                            посетить знаковые исторические и промышленные
-                            площадки города;
-                        </li>
-
-                        <li>
-                            принять участие в квизе и историческом квесте;
-                        </li>
-
-                        <li>
-                            работать в команде;
-                        </li>
-
-                        <li>
-                            представить собственный проект;
-                        </li>
-
-                        <li>
-                            познакомиться с другими студентами.
-                        </li>
-
-                    </ul>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==============================
-         КОГДА И ГДЕ
-    ============================== -->
-
-    <section class="bg-light">
-
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Когда и где?</h2>
-            </div>
-
-            <div style="text-align:center; max-width:700px; margin:0 auto;">
-
-                <h3 style="font-size:1.8rem;">
-                    24–26 мая 2027 года
-                </h3>
-
-                <p style="font-size:1.3rem; font-weight:600; color:var(--blue-main);">
-                    Нижний Новгород
-                </p>
-
-                <p>
-                    Марафон проходит на нескольких площадках города,
-                    связанных с образовательной, промышленной
-                    и исторической памятью.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==============================
-         МАРШРУТ
-    ============================== -->
-
-    <section id="route">
-
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Маршрут марафона</h2>
-            </div>
-
-
-            <div class="route-grid">
-
-
-                <!-- НГЛУ -->
-
-                <div class="route-card">
-
-                    <img
-                        class="route-card-image"
-                        src="https://avatars.mds.yandex.net/get-altay/11072941/2a0000018a9f6842d4de9392d4e8f8fec30f/orig"
-                        alt="Нижегородский государственный лингвистический университет"
-                        loading="lazy"
-                    >
-
-                    <div class="route-card-content">
-
-                        <div class="route-number">
-                            01
-                        </div>
-
-                        <h3>
-                            НГЛУ
-                        </h3>
-
-                        <p>
-                            Нижегородский государственный лингвистический
-                            университет им. Н. А. Добролюбова. Знакомство
-                            с университетом, музейная программа и открытие
-                            марафона.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ГАЗ -->
-
-                <div class="route-card">
-
-                    <img
-                        class="route-card-image"
-                        src="https://avatars.dzeninfra.ru/get-zen_doc/5236207/pub_5fb12ee41064d30b6c0dd7aa_61c9d7004b93a1081790e26e/scale_1200"
-                        alt="Автомобильный завод ГАЗ"
-                        loading="lazy"
-                    >
-
-                    <div class="route-card-content">
-
-                        <div class="route-number">
-                            02
-                        </div>
-
-                        <h3>
-                            Завод «ГАЗ»
-                        </h3>
-
-                        <p>
-                            Экскурсия познакомит участников с промышленной
-                            историей города и ролью предприятия в годы
-                            Великой Отечественной войны.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- КРАСНОЕ СОРМОВО -->
-
-                <div class="route-card">
-
-                    <img
-                        class="route-card-image"
-                        src="https://cruiseinform.ru/upload/iblock/fa0/099liroelcldithz2rrg2d4zu66ece4r.jpg"
-                        alt="Завод Красное Сормово"
-                        loading="lazy"
-                    >
-
-                    <div class="route-card-content">
-
-                        <div class="route-number">
-                            03
-                        </div>
-
-                        <h3>
-                            «Красное Сормово»
-                        </h3>
-
-                        <p>
-                            Участники посетят музей завода и узнают
-                            об истории предприятия и его значении
-                            для города.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- КРЕМЛЬ -->
-
-                <div class="route-card">
-
-                    <img
-                        class="route-card-image"
-                        src="https://s3.russpass.ru/rp-mag-public-prod/images/shutterstoc.format-webp.max-16383x16383.webpquality-100_Hap0qP6.webp"
-                        alt="Нижегородский кремль"
-                        loading="lazy"
-                    >
-
-                    <div class="route-card-content">
-
-                        <div class="route-number">
-                            04
-                        </div>
-
-                        <h3>
-                            Нижегородский кремль
-                        </h3>
-
-                        <p>
-                            На территории Кремля пройдёт исторический
-                            квест, экскурсия и памятное мероприятие.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==============================
-         ПРОГРАММА
-    ============================== -->
-
-    <section id="program" class="bg-light">
-
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Программа</h2>
-            </div>
-
-
-            <div class="day-block">
-
-                <h3>
-                    День 1 — Открытие и знакомство с городом
-                </h3>
-
-                <div class="day-item">
-                    <span class="time">НГЛУ</span>
-                    <span>
-                        Знакомство с университетом и музеем НГЛУ.
-                    </span>
-                </div>
-
-                <div class="day-item">
-                    <span class="time">Открытие</span>
-                    <span>
-                        Торжественное открытие. Старт марафона
-                        и знакомство участников с программой.
-                    </span>
-                </div>
-
-                <div class="day-item">
-                    <span class="time">Лекция</span>
-                    <span>
-                        Роль Нижнего Новгорода в годы
-                        Великой Отечественной войны.
-                    </span>
-                </div>
-
-                <div class="day-item">
-                    <span class="time">Завод «ГАЗ»</span>
-                    <span>
-                        Экскурсия на предприятие.
-                    </span>
-                </div>
-
-                <div class="day-item">
-                    <span class="time">Экскурсия</span>
-                    <span>
-                        Верхняя часть города. Экскурсия
-                        по исторической части Нижнего Новгорода.
-                    </span>
-                </div>
-
-            </div>
-
-
-            <div class="day-block">
-
-                <h3>
-                    День 2 — Промышленный и интеллектуальный блок
-                </h3>
-
-                <div class="day-item">
-                    <span class="time">Музей</span>
-                    <span>
-                        Музей завода «Красное Сормово».
-                        Экскурсия и знакомство с историей предприятия.
-                    </span>
-                </div>
-
-                <div class="day-item">
-                    <span class="time">Квиз</span>
-                    <span>
-                        Исторический квиз. Проверяем знания
-                        об истории города и Великой Отечественной войне.
-                    </span>
-                </div>
-
-                <div class="day-item">
-                    <span class="time">Проекты</span>
-                    <span>
-                        Презентация проектов команд. Участники
-                        представляют свои проекты, посвящённые
-                        сохранению исторической памяти.
-                    </span>
-                </div>
-
-                <div class="day-item">
-                    <span class="time">Квест</span>
-                    <span>
-                        Исторический квест. Командное испытание
-                        на территории Нижегородского кремля.
-                    </span>
-                </div>
-
-            </div>
-
-
-            <div class="day-block">
-
-                <h3>
-                    День 3 — Память и наследие
-                </h3>
-
-                <div class="day-item">
-                    <span class="time">Кремль</span>
-                    <span>
-                        Экскурсия по территории Кремля.
-                    </span>
-                </div>
-
-                <div class="day-item">
-                    <span class="time">Митинг</span>
-                    <span>
-                        Памятное мероприятие в честь погибших.
-                        Возложение цветов к Вечному огню.
-                    </span>
-                </div>
-
-                <div class="day-item">
-                    <span class="time">Закрытие</span>
-                    <span>
-                        Итоги трёх дней, завершение программы
-                        и торжественная церемония закрытия.
-                    </span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==============================
-         ЧТО БУДЕТ
-    ============================== -->
-
-    <section id="what">
-
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Что будет на марафоне?</h2>
-            </div>
-
-            <div class="grid-3">
-
-                <div class="card">
-                    <div class="card-icon">🎓</div>
-                    <h4>Лекции</h4>
-                    <p>
-                        История Нижнего Новгорода и его роль
-                        в годы Великой Отечественной войны.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🚌</div>
-                    <h4>Экскурсии</h4>
-                    <p>
-                        Посещение НГЛУ, «ГАЗ», музея
-                        «Красное Сормово» и Нижегородского кремля.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🧠</div>
-                    <h4>Исторический квиз</h4>
-                    <p>
-                        Интеллектуальное командное соревнование
-                        для всех, кто любит историю.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🗺</div>
-                    <h4>Исторический квест</h4>
-                    <p>
-                        Исследование территории Кремля
-                        через задания и командную работу.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">📊</div>
-                    <h4>Командные проекты</h4>
-                    <p>
-                        Презентация студенческих проектов,
-                        посвящённых сохранению исторической памяти.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <div class="card-icon">🕯</div>
-                    <h4>Памятные мероприятия</h4>
-                    <p>
-                        Митинг-реквием и возложение цветов
-                        к Вечному огню.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==============================
-         РЕГИСТРАЦИЯ
-    ============================== -->
-
-    <section id="registration" class="bg-light">
-
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Регистрация участника</h2>
-            </div>
-
-            <div class="reg-form-box">
-
-                <form id="regForm">
-
-                    <div class="form-group">
-                        <label>Фамилия и имя *</label>
-                        <input
-                            type="text"
-                            name="name"
-                            required
-                            placeholder="Иванов Иван"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label>Электронная почта *</label>
-                        <input
-                            type="email"
-                            name="email"
-                            required
-                            placeholder="example@mail.ru"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label>Телефон *</label>
-                        <input
-                            type="tel"
-                            name="phone"
-                            required
-                            placeholder="+7 (___) ___-__-__"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label>Возраст *</label>
-                        <input
-                            type="number"
-                            name="age"
-                            min="18"
-                            max="25"
-                            required
-                            placeholder="18–25"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label>Город *</label>
-                        <input
-                            type="text"
-                            name="city"
-                            required
-                            placeholder="Нижний Новгород"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label>Учебное заведение *</label>
-                        <input
-                            type="text"
-                            name="university"
-                            required
-                            placeholder="НГЛУ им. Н. А. Добролюбова"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label>Курс *</label>
-                        <input
-                            type="number"
-                            name="course"
-                            min="1"
-                            max="6"
-                            required
-                            placeholder="1–6"
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label>Мотивация</label>
-                        <textarea
-                            name="motivation"
-                            rows="4"
-                            placeholder="Расскажите о своей мотивации..."
-                        ></textarea>
-                    </div>
-
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                        id="submitBtn"
-                    >
-                        Зарегистрироваться
-                    </button>
-
-                    <p
-                        id="formStatus"
-                        style="margin-top:15px; text-align:center; font-weight:600;"
-                    ></p>
-
-                </form>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ==============================
-         КОНТАКТЫ
-    ============================== -->
-
-    <section id="contacts">
-
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Контакты</h2>
-            </div>
-
-            <div class="grid-3">
-
-                <div class="contact-card">
-
-                    <h4>
-                        Шуйкина Ксения
-                    </h4>
-
-                    <p class="role">
-                        Руководитель проекта
-                    </p>
-
-                    <a
-                        href="mailto:ksusasujkina@gmail.com"
-                        class="contact-link"
-                    >
-                        ksusasujkina@gmail.com
-                    </a>
-
-                    <a
-                        href="tel:+79535733766"
-                        class="contact-link"
-                    >
-                        8 953 573-37-66
-                    </a>
-
-                </div>
-
-
-                <div class="contact-card">
-
-                    <h4>
-                        Ватутин Иван
-                    </h4>
-
-                    <p class="role">
-                        Наставник проекта
-                    </p>
-
-                    <a
-                        href="mailto:ivan51019@yandex.ru"
-                        class="contact-link"
-                    >
-                        ivan51019@yandex.ru
-                    </a>
-
-                    <a
-                        href="tel:+79875306003"
-                        class="contact-link"
-                    >
-                        8 987 530-60-03
-                    </a>
-
-                </div>
-
-
-                <div class="contact-card">
-
-                    <h4>
-                        Кохан Надежда
-                    </h4>
-
-                    <p class="role">
-                        Наставник проекта
-                    </p>
-
-                    <a
-                        href="mailto:kokhann@yandex.ru"
-                        class="contact-link"
-                    >
-                        kokhann@yandex.ru
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div
-                class="email-box"
-                style="max-width:600px; margin:30px auto 0;"
-            >
-
-                <p>
-                    По всем вопросам обращаться на почту:
-                </p>
-
-                <a href="mailto:dorogamipamyatinn@mail.ru">
-                    dorogamipamyatinn@mail.ru
+            <p class="hero-description">
+                Три дня, посвящённые истории Нижнего Новгорода
+                (Горького) в годы Великой Отечественной войны,
+                трудовому подвигу горьковчан и сохранению исторической памяти.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#registration" class="btn btn-primary">
+                    Зарегистрироваться
+                </a>
+
+                <a href="#program" class="btn btn-secondary">
+                    Посмотреть программу
                 </a>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- ==============================
-         FOOTER
-    ============================== -->
+<!-- ================= ABOUT ================= -->
 
-    <footer>
+<section id="about">
 
-        <div class="container">
+    <div class="container">
 
-            <div class="footer-inner">
+        <div class="section-title">
+            <span>О марафоне</span>
+            <h2>История города<br>через его людей</h2>
+        </div>
 
-                <div>
+        <div class="about-grid">
 
-                    <div class="footer-brand">
-                        ДОРОГАМИ <span>ПАМЯТИ</span>
-                    </div>
+            <div class="about-text">
 
-                    <p>
-                        Молодёжный исторический марафон
-                    </p>
+                <p>
+                    «Дорогами памяти» — это молодёжный исторический
+                    марафон, посвящённый Нижнему Новгороду и его роли
+                    в истории Великой Отечественной войны.
+                </p>
 
-                    <p>
-                        24–26 мая 2027 · Нижний Новгород
-                    </p>
+                <p>
+                    В течение трёх дней участники посетят исторические
+                    и промышленные объекты города, узнают о трудовом
+                    подвиге горьковчан и попробуют самостоятельно
+                    осмыслить события военных лет.
+                </p>
 
-                </div>
-
-
-                <div>
-
-                    <h4>
-                        Навигация
-                    </h4>
-
-                    <ul>
-
-                        <li>
-                            <a href="#about">
-                                О марафоне
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#program">
-                                Программа
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#route">
-                                Маршрут
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#registration">
-                                Регистрация
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-                <div>
-
-                    <h4>
-                        Контакты
-                    </h4>
-
-                    <ul>
-
-                        <li>
-                            <a href="mailto:dorogamipamyatinn@mail.ru">
-                                dorogamipamyatinn@mail.ru
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="mailto:ksusasujkina@gmail.com">
-                                ksusasujkina@gmail.com
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </div>
+                <p>
+                    Марафон объединяет образовательную программу,
+                    экскурсии, командные задания, исторические
+                    испытания и памятные мероприятия.
+                </p>
 
             </div>
 
+            <div class="about-highlight">
 
-            <div class="footer-bottom">
+                <strong>3 дня</strong>
 
-                © 2027 Дорогами памяти ·
-                НГЛУ им. Н. А. Добролюбова
+                <span>
+                    образовательной, экскурсионной и командной программы
+                    в Нижнем Новгороде
+                </span>
 
             </div>
 
         </div>
 
-    </footer>
+    </div>
+
+</section>
 
 
-    <!-- ==============================
-         ОТПРАВКА ФОРМЫ
-    ============================== -->
+<!-- ================= GOALS ================= -->
 
-    <script>
+<section id="goals">
 
-        document
-            .getElementById('regForm')
-            .addEventListener('submit', async function(e) {
+    <div class="container">
 
-                e.preventDefault();
+        <div class="section-title">
 
-                const btn =
-                    document.getElementById('submitBtn');
+            <span>Цели марафона</span>
 
-                const status =
-                    document.getElementById('formStatus');
+            <h2>
+                Память, знание<br>
+                и личное участие
+            </h2>
 
-                btn.disabled = true;
-                btn.textContent = 'Отправка...';
-                status.textContent = '';
+        </div>
 
-                const formData =
-                    new FormData(this);
+        <div class="grid-3">
 
-                const data = {};
+            <div class="card">
 
-                formData.forEach(
-                    (value, key) => data[key] = value
-                );
+                <div class="card-number">01</div>
 
-                try {
+                <h3>Изучить историю</h3>
 
-                    await fetch(
-                        'https://script.google.com/macros/s/AKfycbymbrep-vBE5eBMohOxUM8Za_eaR3_Zft6tpKjwy4-N1o38CD8bwicMD9oSG3kn94msJg/exec',
-                        {
-                            method: 'POST',
-                            mode: 'no-cors',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(data)
-                        }
-                    );
+                <p>
+                    Познакомиться с историей Нижнего Новгорода
+                    и Горького в годы Великой Отечественной войны.
+                </p>
 
-                    status.style.color = '#7a1f35';
+            </div>
 
-                    status.textContent =
-                        '✅ Спасибо! Ваша заявка отправлена.';
 
-                    this.reset();
+            <div class="card">
 
-                } catch (error) {
+                <div class="card-number">02</div>
 
-                    status.style.color = '#a93245';
+                <h3>Сохранить память</h3>
 
-                    status.textContent =
-                        '❌ Ошибка отправки. Попробуйте ещё раз.';
+                <p>
+                    Осмыслить значение исторической памяти
+                    и узнать о людях, внёсших вклад в Победу.
+                </p>
 
-                } finally {
+            </div>
 
-                    btn.disabled = false;
 
-                    btn.textContent =
-                        'Зарегистрироваться';
+            <div class="card">
 
-                }
+                <div class="card-number">03</div>
 
-            });
+                <h3>Работать вместе</h3>
 
-    </script>
+                <p>
+                    Объединить студентов нижегородских вузов
+                    через командные задания и совместные проекты.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PARTICIPANTS ================= -->
+
+<section id="participants">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>Участники</span>
+
+            <h2>Для кого марафон?</h2>
+
+        </div>
+
+        <div class="grid-2">
+
+            <div>
+
+                <h3>Кто может стать участником?</h3>
+
+                <p>
+                    Марафон рассчитан на студентов нижегородских вузов
+                    в возрасте от 18 до 25 лет.
+                </p>
+
+                <p>
+                    Участников ждут три дня образовательной и экскурсионной
+                    программы, командная работа, интеллектуальные испытания
+                    и знакомство с историей Нижнего Новгорода.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>Что получает участник?</h3>
+
+                <ul class="goal-list">
+
+                    <li>
+                        расширить знания об истории родного города;
+                    </li>
+
+                    <li>
+                        посетить значимые исторические и промышленные объекты;
+                    </li>
+
+                    <li>
+                        принять участие в командных исторических заданиях;
+                    </li>
+
+                    <li>
+                        узнать о трудовом подвиге горьковчан;
+                    </li>
+
+                    <li>
+                        познакомиться с другими студентами нижегородских вузов;
+                    </li>
+
+                    <li>
+                        принять участие в памятных мероприятиях.
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= DATE / PLACE ================= -->
+
+<section id="date">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>Когда и где?</span>
+
+            <h2>Три дня в Нижнем Новгороде</h2>
+
+        </div>
+
+        <div class="date-place">
+
+            <div class="date-card">
+
+                <div class="label">Дата</div>
+
+                <h3>24–26 мая 2027</h3>
+
+                <p>
+                    Три дня образовательной и экскурсионной программы.
+                </p>
+
+            </div>
+
+
+            <div class="date-card light">
+
+                <div class="label">Место</div>
+
+                <h3>Нижний Новгород</h3>
+
+                <p>
+                    Исторические места, предприятия и памятные объекты
+                    города, связанные с военной историей Горького.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ROUTE ================= -->
+
+<section id="route">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>Маршрут</span>
+
+            <h2>
+                Город как пространство памяти
+            </h2>
+
+            <p>
+                Маршрут объединяет образовательные площадки,
+                промышленные предприятия и исторические места Нижнего Новгорода.
+            </p>
+
+        </div>
+
+
+        <div class="route-grid">
+
+
+            <!-- НГЛУ -->
+
+            <article class="route-card">
+
+                <div class="route-image">
+
+                    <img
+                        src="https://avatars.mds.yandex.net/get-altay/11072941/2a0000018a9f6842d4de9392d4e8f8fec30f/orig"
+                        alt="Нижегородский государственный лингвистический университет"
+                        loading="lazy"
+                    >
+
+                </div>
+
+                <div class="route-content">
+
+                    <span>Точка маршрута</span>
+
+                    <h3>НГЛУ</h3>
+
+                    <p>
+                        Нижегородский государственный лингвистический
+                        университет им. Н. А. Добролюбова.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- ГАЗ -->
+
+            <article class="route-card">
+
+                <div class="route-image">
+
+                    <img
+                        src="https://avatars.dzeninfra.ru/get-zen_doc/5236207/pub_5fb12ee41064d30b6c0dd7aa_61c9d7004b93a1081790e26e/scale_1200"
+                        alt="Горьковский автомобильный завод"
+                        loading="lazy"
+                    >
+
+                </div>
+
+                <div class="route-content">
+
+                    <span>Промышленная история</span>
+
+                    <h3>ГАЗ</h3>
+
+                    <p>
+                        Горьковский автомобильный завод и история
+                        промышленного Нижнего Новгорода.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- КРАСНОЕ СОРМОВО -->
+
+            <article class="route-card">
+
+                <div class="route-image">
+
+                    <img
+                        src="https://cruiseinform.ru/upload/iblock/fa0/099liroelcldithz2rrg2d4zu66ece4r.jpg"
+                        alt="Красное Сормово"
+                        loading="lazy"
+                    >
+
+                </div>
+
+                <div class="route-content">
+
+                    <span>Трудовой подвиг</span>
+
+                    <h3>Красное Сормово</h3>
+
+                    <p>
+                        История одного из крупнейших промышленных
+                        предприятий города.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- КРЕМЛЬ -->
+
+            <article class="route-card">
+
+                <div class="route-image">
+
+                    <img
+                        src="https://s3.russpass.ru/rp-mag-public-prod/images/shutterstoc.format-webp.max-16383x16383.webpquality-100_Hap0qP6.webp"
+                        alt="Нижегородский кремль"
+                        loading="lazy"
+                    >
+
+                </div>
+
+                <div class="route-content">
+
+                    <span>Исторический центр</span>
+
+                    <h3>Нижегородский кремль</h3>
+
+                    <p>
+                        Финальная точка маршрута и пространство
+                        для памятных мероприятий.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- ИСТОРИЯ ГОРОДА -->
+
+        <div class="war-history">
+
+            <h3>
+                Горький — город-труженик в годы войны
+            </h3>
+
+            <p>
+                Во время Великой Отечественной войны Горький стал
+                одним из важнейших промышленных центров страны.
+                Предприятия города работали для фронта,
+                а тысячи горьковчан внесли свой вклад в Победу.
+            </p>
+
+
+            <div class="history-grid">
+
+                <div class="history-photo">
+
+                    <img
+                        src="https://a1.drive-data.ru/7782266s-1920.jpg"
+                        alt="Горький в годы Великой Отечественной войны"
+                        loading="lazy"
+                    >
+
+                </div>
+
+
+                <div class="history-photo">
+
+                    <img
+                        src="https://cdn.vesti.ru/photobank/old/pic-o/214/698/5.jpg"
+                        alt="Исторический Нижний Новгород"
+                        loading="lazy"
+                    >
+
+                </div>
+
+
+                <div class="history-photo">
+
+                    <img
+                        src="https://sun9-52.vkuserphoto.ru/s/v1/ig2/drlcRPyoF-9z8X9alCFYV0rHm-kVpokMhE0ZjAfA_XWxKPeKqHyrjlpcQJ1xaj7qCfzAvFQmXtgI4Ki6eBHiRQH3.jpg?quality=95&as=32x21,48x32,72x48,108x72,160x107,240x160,360x240,480x320,540x360,640x427,720x480,807x538&from=bu&cs=640x0"
+                        alt="Горький в годы войны"
+                        loading="lazy"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROGRAM ================= -->
+
+<section id="program">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>Программа</span>
+
+            <h2>Три дня — три маршрута памяти</h2>
+
+            <p>
+                Программа сочетает лекции, экскурсии, командную работу,
+                исторические задания и памятные мероприятия.
+            </p>
+
+        </div>
+
+
+        <div class="program">
+
+
+            <!-- ДЕНЬ 1 -->
+
+            <div class="program-day">
+
+                <div class="day-header">
+
+                    <h3>День 1 — История города</h3>
+
+                    <span>24 мая</span>
+
+                </div>
+
+                <div class="day-content">
+
+                    <div class="day-item">
+
+                        <span class="time">Утро</span>
+
+                        <span>
+                            Открытие марафона и знакомство участников.
+                        </span>
+
+                    </div>
+
+                    <div class="day-item">
+
+                        <span class="time">День</span>
+
+                        <span>
+                            Образовательная программа,
+                            посвящённая Нижнему Новгороду
+                            в годы Великой Отечественной войны.
+                        </span>
+
+                    </div>
+
+                    <div class="day-item">
+
+                        <span class="time">После обеда</span>
+
+                        <span>
+                            Экскурсионная программа и работа с историческими материалами.
+                        </span>
+
+                    </div>
+
+                    <div class="day-item">
+
+                        <span class="time">Вечер</span>
+
+                        <span>
+                            Командное историческое задание.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ДЕНЬ 2 -->
+
+            <div class="program-day">
+
+                <div class="day-header">
+
+                    <h3>День 2 — Город, который работал для фронта</h3>
+
+                    <span>25 мая</span>
+
+                </div>
+
+                <div class="day-content">
+
+                    <div class="day-item">
+
+                        <span class="time">Утро</span>
+
+                        <span>
+                            Посещение промышленных площадок,
+                            связанных с историей Горького.
+                        </span>
+
+                    </div>
+
+                    <div class="day-item">
+
+                        <span class="time">День</span>
+
+                        <span>
+                            ГАЗ и история автомобильной промышленности
+                            города в военные годы.
+                        </span>
+
+                    </div>
+
+                    <div class="day-item">
+
+                        <span class="time">После обеда</span>
+
+                        <span>
+                            Красное Сормово и трудовой подвиг
+                            работников предприятия.
+                        </span>
+
+                    </div>
+
+                    <div class="day-item">
+
+                        <span class="time">Вечер</span>
+
+                        <span>
+                            Командный квест и подведение итогов дня.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ДЕНЬ 3 -->
+
+            <div class="program-day">
+
+                <div class="day-header">
+
+                    <h3>День 3 — Память</h3>
+
+                    <span>26 мая</span>
+
+                </div>
+
+                <div class="day-content">
+
+                    <div class="day-item">
+
+                        <span class="time">Утро</span>
+
+                        <span>
+                            Финальная часть образовательной программы.
+                        </span>
+
+                    </div>
+
+                    <div class="day-item">
+
+                        <span class="time">День</span>
+
+                        <span>
+                            Исторический маршрут по центру Нижнего Новгорода.
+                        </span>
+
+                    </div>
+
+                    <div class="day-item">
+
+                        <span class="time">Митинг</span>
+
+                        <span>
+                            Памятное мероприятие в честь погибших.
+                            Возложение цветов к Вечному огню.
+                        </span>
+
+                    </div>
+
+                    <div class="day-item">
+
+                        <span class="time">Финал</span>
+
+                        <span>
+                            Подведение итогов марафона и закрытие.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section id="features">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>Формат</span>
+
+            <h2>Что будет на марафоне?</h2>
+
+        </div>
+
+
+        <div class="features-grid">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">01</div>
+
+                <h3>Исторические экскурсии</h3>
+
+                <p>
+                    Посещение мест, связанных с историей Нижнего Новгорода
+                    и Горького военных лет.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">02</div>
+
+                <h3>Лекции и встречи</h3>
+
+                <p>
+                    Образовательные занятия с обсуждением исторических
+                    событий и судеб людей.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">03</div>
+
+                <h3>Командные задания</h3>
+
+                <p>
+                    Исторические квесты, интеллектуальные испытания
+                    и работа с источниками.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">04</div>
+
+                <h3>Памятные мероприятия</h3>
+
+                <p>
+                    Участие в мероприятиях, посвящённых сохранению
+                    памяти о героях и событиях войны.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= REGISTRATION ================= -->
+
+<section id="registration" class="registration">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>Регистрация</span>
+
+            <h2>Станьте участником марафона</h2>
+
+        </div>
+
+
+        <div class="registration-grid">
+
+
+            <div class="registration-info">
+
+                <p>
+                    Заполните форму, чтобы принять участие
+                    в молодёжном историческом марафоне
+                    «Дорогами памяти».
+                </p>
+
+                <ul>
+
+                    <li>
+                        участник — студент нижегородского вуза;
+                    </li>
+
+                    <li>
+                        возраст — от 18 до 25 лет;
+                    </li>
+
+                    <li>
+                        участие в программе — 24–26 мая 2027 года;
+                    </li>
+
+                    <li>
+                        участие во всех основных мероприятиях марафона.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <form
+                class="form"
+                id="registrationForm"
+                method="POST"
+                action="https://script.google.com/macros/s/AKfycbymbrep-vBE5eBMohOxUM8Za_eaR3_Zft6tpKjwy4-N1o38CD8bwicMD9oSG3kn94msJg/exec"
+            >
+
+                <div class="form-group">
+
+                    <label for="name">
+                        ФИО
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Введите ФИО"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="university">
+                        Вуз
+                    </label>
+
+                    <input
+                        type="text"
+                        id="university"
+                        name="university"
+                        placeholder="Название нижегородского вуза"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="group">
+                        Группа
+                    </label>
+
+                    <input
+                        type="text"
+                        id="group"
+                        name="group"
+                        placeholder="Номер группы"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="age">
+                        Возраст
+                    </label>
+
+                    <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        min="18"
+                        max="25"
+                        placeholder="18–25"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Телефон
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="+7 (___) ___-__-__"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Электронная почта
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="example@mail.ru"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="comment">
+                        Дополнительная информация
+                    </label>
+
+                    <textarea
+                        id="comment"
+                        name="comment"
+                        placeholder="При необходимости укажите дополнительную информацию"
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    Отправить заявку
+                </button>
+
+
+                <div
+                    id="formStatus"
+                    class="form-status"
+                ></div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACTS ================= -->
+
+<section id="contacts">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span>Контакты</span>
+
+            <h2>Связаться с организаторами</h2>
+
+        </div>
+
+
+        <div class="contacts-grid">
+
+
+            <div class="contact-card">
+
+                <h3>Организаторы</h3>
+
+                <p>
+                    Организационная команда
+                    молодёжного исторического марафона
+                    «Дорогами памяти».
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <h3>Место проведения</h3>
+
+                <p>
+                    Нижний Новгород,
+                    Нижегородская область.
+                </p>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                <h3>Дата</h3>
+
+                <p>
+                    24–26 мая 2027 года
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+
+            <div>
+
+                <h3>Дорогами памяти</h3>
+
+                <p>
+                    Молодёжный исторический марафон,
+                    посвящённый истории Нижнего Новгорода
+                    в годы Великой Отечественной войны
+                    и сохранению исторической памяти.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>Разделы</h3>
+
+                <ul>
+
+                    <li>
+                        <a href="#about">О марафоне</a>
+                    </li>
+
+                    <li>
+                        <a href="#goals">Цели</a>
+                    </li>
+
+                    <li>
+                        <a href="#route">Маршрут</a>
+                    </li>
+
+                    <li>
+                        <a href="#program">Программа</a>
+                    </li>
+
+                    <li>
+                        <a href="#registration">Регистрация</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div>
+
+                <h3>Марафон</h3>
+
+                <ul>
+
+                    <li>
+                        24–26 мая 2027 года
+                    </li>
+
+                    <li>
+                        Нижний Новгород
+                    </li>
+
+                    <li>
+                        Для студентов нижегородских вузов
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2027 «Дорогами памяти»
+            </span>
+
+            <span>
+                Сохраняем историю вместе
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    const form = document.getElementById("registrationForm");
+    const status = document.getElementById("formStatus");
+
+    form.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const submitButton = form.querySelector("button[type='submit']");
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Отправка...";
+
+        status.textContent = "";
+        status.style.color = "";
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: "POST",
+            body: formData,
+            mode: "no-cors"
+        })
+        .then(function() {
+
+            status.textContent =
+                "Заявка отправлена. Спасибо за регистрацию!";
+
+            status.style.color = "#7a263c";
+
+            form.reset();
+
+            submitButton.disabled = false;
+            submitButton.textContent = "Отправить заявку";
+
+        })
+        .catch(function() {
+
+            status.textContent =
+                "Не удалось отправить заявку. Попробуйте ещё раз.";
+
+            status.style.color = "#c0392b";
+
+            submitButton.disabled = false;
+            submitButton.textContent = "Отправить заявку";
+
+        });
+
+    });
+
+
+    /* Плавная прокрутка */
+
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+
+        link.addEventListener("click", function(event) {
+
+            const targetId = this.getAttribute("href");
+
+            if (targetId === "#") {
+                return;
+            }
+
+            const target = document.querySelector(targetId);
+
+            if (target) {
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        });
+
+    });
+
+</script>
 
 </body>
 </html>
