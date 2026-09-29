@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дорогами памяти — Молодёжный исторический марафон</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --blue-dark: #0a1f4d;
+            --blue-deep: #061533;
+            --blue-main: #163a7a;
+            --blue-light: #4a7fd4;
+            --blue-pale: #e8f0fe;
+            --white: #ffffff;
+            --gray-light: #f5f8ff;
+            --gray-text: #2a3b5c;
+            --shadow: 0 4px 25px rgba(6, 21, 51, 0.12);
+            --radius: 12px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            color: var(--gray-text);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        h1, h2, h3, h4 {
+            color: var(--blue-dark);
+            font-weight: 700;
+            line-height: 1.2;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            letter-spacing: 0.5px;
+        }
+
+        h1 { font-size: 2.8rem; text-transform: uppercase; letter-spacing: 3px; }
+        h2 { font-size: 2.2rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
+        h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+        h4 { font-size: 1.1rem; margin-bottom: 0.5rem; font-family: 'Segoe UI', sans-serif; }
+
+        p { margin-bottom: 1rem; color: #4a5568; }
+
+        .section-title { text-align: center; margin-bottom: 2.5rem; }
+        .section-title h2 { display: inline-block; position: relative; padding-bottom: 18px; }
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 100px; height: 2px;
+            background: var(--blue-main);
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary { background: var(--blue-dark); color: var(--white); border-color: var(--blue-dark); }
+        .btn-primary:hover { background: var(--blue-main); border-color: var(--blue-main); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(10, 31, 77, 0.3); }
+        .btn-outline { background: transparent; color: var(--blue-dark); border-color: var(--blue-dark); }
+        .btn-outline:hover { background: var(--blue-dark); color: var(--white); transform: translateY(-2px); }
+        .btn-white { background: var(--white); color: var(--blue-dark); border-color: var(--white); }
+        .btn-white:hover { background: var(--blue-pale); transform: translateY(-2px); }
+
+        /* --- Шапка --- */
+        header {
+            background: var(--blue-deep);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo-text {
+            font-family: 'Georgia', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            color: var(--white);
+        }
+        .logo-text span { color: var(--blue-light); }
+
+        nav ul { display: flex; list-style: none; gap: 25px; align-items: center; }
+        nav ul li a {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        nav ul li a:hover { color: var(--white); }
+
+        .dropdown { position: relative; }
+        .dropdown-toggle { cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .dropdown-toggle::after { content: '▾'; font-size: 0.7rem; transition: transform 0.3s; }
+        .dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%; right: 0;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(6, 21, 51, 0.2);
+            padding: 20px;
+            min-width: 300px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .dropdown-menu h4 {
+            color: var(--blue-dark);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--blue-pale);
+            font-family: 'Georgia', serif;
+        }
+        .dropdown-menu .contact-item { margin-bottom: 12px; }
+        .dropdown-menu .contact-item:last-child { margin-bottom: 0; }
+        .dropdown-menu .contact-name { font-weight: 700; color: var(--blue-dark); font-size: 0.9rem; display: block; margin-bottom: 3px; }
+        .dropdown-menu .contact-role { font-size: 0.8rem; color: #718096; display: block; margin-bottom: 3px; }
+        .dropdown-menu .contact-link { font-size: 0.85rem; color: var(--blue-main); display: block; transition: color 0.3s; }
+        .dropdown-menu .contact-link:hover { color: var(--blue-dark); text-decoration: underline; }
+
+        /* --- Hero --- */
+        .hero {
+            background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-dark) 50%, var(--blue-main) 100%);
+            color: var(--white);
+            padding: 100px 0 90px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%; right: -15%;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%; left: -10%;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero .container { position: relative; z-index: 1; }
+        .hero-label {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+        .hero h1 { color: var(--white); font-size: 3rem; margin-bottom: 15px; font-family: 'Georgia', serif; }
+        .hero p { color: rgba(255,255,255,0.9); font-size: 1.15rem; max-width: 700px; margin-bottom: 10px; }
+        .hero-meta { font-size: 1.1rem; color: var(--blue-pale); margin-bottom: 30px; font-weight: 600; letter-spacing: 1px; }
+        .hero-buttons { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 30px; }
+
+        section { padding: 80px 0; }
+        .bg-light { background: var(--gray-light); }
+        .bg-blue { background: var(--blue-dark); color: var(--white); }
+        .bg-blue h2, .bg-blue h3, .bg-blue h4 { color: var(--white); }
+        .bg-blue p { color: rgba(255,255,255,0.9); }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; align-items: start; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 3px solid var(--blue-dark);
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(10, 31, 77, 0.15); }
+        .card-icon {
+            width: 50px; height: 50px;
+            background: var(--blue-pale);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: var(--blue-dark);
+        }
+
+        .goal-list { list-style: none; }
+        .goal-list li { padding: 12px 0 12px 35px; position: relative; border-bottom: 1px solid var(--blue-pale); }
+        .goal-list li:last-child { border-bottom: none; }
+        .goal-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0; top: 12px;
+            color: var(--blue-main);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .why-nn {
+            margin-top: 40px;
+            padding: 30px;
+            background: var(--blue-pale);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--blue-dark);
+        }
+        .why-nn h3 { color: var(--blue-dark); margin-bottom: 15px; }
+        .why-nn p { margin-bottom: 0; }
+
+        .day-block {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--blue-dark);
+        }
+        .day-block h3 {
+            color: var(--blue-dark);
+            border-bottom: 1px solid var(--blue-pale);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .day-item {
+            display: flex;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px dashed var(--blue-pale);
+        }
+        .day-item:last-child { border-bottom: none; }
+        .day-item .time {
+            font-weight: 700;
+            color: var(--blue-main);
+            min-width: 100px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .route {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 30px;
+            background: var(--blue-pale);
+            border-radius: var(--radius);
+            font-weight: 700;
+            color: var(--blue-dark);
+            font-size: 1.1rem;
+            font-family: 'Georgia', serif;
+        }
+        .route-arrow { color: var(--blue-main); font-size: 1.3rem; }
+
+        .reg-form-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--blue-dark);
+        }
+        .reg-form-box .form-group { margin-bottom: 20px; }
+        .reg-form-box label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--blue-dark);
+            font-size: 0.95rem;
+        }
+        .reg-form-box input,
+        .reg-form-box textarea {
+            width: 100%;
+            display: block;
+            padding: 12px 16px;
+            border: 2px solid var(--blue-pale);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: var(--white);
+            color: var(--gray-text);
+            box-sizing: border-box;
+        }
+        .reg-form-box input:focus,
+        .reg-form-box textarea:focus {
+            outline: none;
+            border-color: var(--blue-main);
+            box-shadow: 0 0 0 3px rgba(30, 77, 156, 0.15);
+        }
+        .reg-form-box textarea { resize: vertical; min-height: 100px; }
+        .reg-form-box .btn { width: 100%; margin-top: 10px; padding: 16px; }
+        .reg-form-box .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border-top: 3px solid var(--blue-dark);
+        }
+        .contact-card h4 { color: var(--blue-dark); margin-bottom: 10px; font-family: 'Georgia', serif; }
+        .contact-card .role { font-size: 0.9rem; color: #718096; margin-bottom: 15px; }
+        .contact-card .contact-link { display: block; color: var(--blue-main); font-weight: 600; margin-bottom: 5px; transition: color 0.3s; }
+        .contact-card .contact-link:hover { color: var(--blue-dark); text-decoration: underline; }
+
+        .email-box {
+            background: var(--blue-pale);
+            border-radius: var(--radius);
+            padding: 25px;
+            text-align: center;
+            margin-top: 25px;
+        }
+        .email-box p { margin-bottom: 8px; color: var(--blue-dark); font-weight: 600; }
+        .email-box a { font-size: 1.1rem; color: var(--blue-main); font-weight: 700; transition: color 0.3s; }
+        .email-box a:hover { color: var(--blue-dark); text-decoration: underline; }
+
+        footer { background: var(--blue-deep); color: rgba(255,255,255,0.8); padding: 50px 0 30px; }
+        .footer-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 30px; }
+        footer h4 { color: var(--white); margin-bottom: 15px; font-size: 1.1rem; font-family: 'Georgia', serif; }
+        footer ul { list-style: none; }
+        footer ul li { margin-bottom: 8px; }
+        footer ul li a { color: rgba(255,255,255,0.7); transition: color 0.3s; }
+        footer ul li a:hover { color: var(--white); }
+
+        .footer-brand {
+            font-family: 'Georgia', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+        .footer-brand span { color: var(--blue-light); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.9rem; letter-spacing: 2px; }
+            h2 { font-size: 1.6rem; letter-spacing: 1px; }
+            nav ul { display: none; }
+            .logo-text { font-size: 1rem; letter-spacing: 2px; }
+            .hero { padding: 60px 0 50px; }
+            .hero h1 { font-size: 1.8rem; }
+            section { padding: 50px 0; }
+            .route { font-size: 0.95rem; padding: 20px; }
+            .day-item { flex-direction: column; gap: 5px; }
+            .hero-buttons { flex-direction: column; align-items: flex-start; }
+            .reg-form-box { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ШАПКА (без эмблемы) ===== -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo-text">ДОРОГАМИ <span>ПАМЯТИ</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#about">О марафоне</a></li>
+                    <li><a href="#program">Программа</a></li>
+                    <li><a href="#route">Маршрут</a></li>
+                    <li><a href="#what">Что будет</a></li>
+                    <li><a href="#registration">Регистрация</a></li>
+                    <li class="dropdown">
+                        <a href="#contacts" class="dropdown-toggle">Контакты</a>
+                        <div class="dropdown-menu">
+                            <h4>Контакты организаторов</h4>
+                            <div class="contact-item">
+                                <span class="contact-name">Шуйкина Ксения</span>
+                                <span class="contact-role">Руководитель проекта</span>
+                                <a href="mailto:ksusasujkina@gmail.com" class="contact-link">ksusasujkina@gmail.com</a>
+                                <a href="tel:+79535733766" class="contact-link">8 953 573-37-66</a>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-name">Ватутин Иван</span>
+                                <span class="contact-role">Наставник проекта</span>
+                                <a href="mailto:ivan51019@yandex.ru" class="contact-link">ivan51019@yandex.ru</a>
+                                <a href="tel:+79875306003" class="contact-link">8 987 530-60-03</a>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-name">Кохан</span>
+                                <span class="contact-role">Наставник проекта</span>
+                                <a href="mailto:kokhann@yandex.ru" class="contact-link">kokhann@yandex.ru</a>
+                            </div>
+                            <div class="contact-item" style="border-top:1px solid var(--blue-pale); padding-top:12px; margin-top:12px;">
+                                <span class="contact-role">Общие вопросы</span>
+                                <a href="mailto:dorogamipamyatinn@mail.ru" class="contact-link">dorogamipamyatinn@mail.ru</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-label">Молодёжный исторический марафон</div>
+            <h1>ДОРОГАМИ ПАМЯТИ</h1>
+            <p class="hero-meta">24–26 мая 2027 года · Нижний Новгород</p>
+            <p>Три дня, посвящённые истории Нижнего Новгорода (Горького) в годы Великой Отечественной войны, трудовому подвигу горьковчан и сохранению исторической памяти.</p>
+            <p>Лекции · экскурсии · исторический квиз · квест · командные проекты · памятные мероприятия</p>
+            <div class="hero-buttons">
+                <a href="#about" class="btn btn-white">Узнать больше</a>
+                <a href="#program" class="btn btn-outline" style="color:#fff; border-color:#fff;">Программа</a>
+                <a href="#registration" class="btn btn-primary" style="background:#fff; color:#0a1f4d; border-color:#fff;">Стать участником</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== О МАРАФОНЕ ===== -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title"><h2>О марафоне</h2></div>
+            <div class="grid-2">
+                <div>
+                    <h3>Что такое «Дорогами памяти»?</h3>
+                    <p>«Дорогами памяти» — трёхдневный молодёжный исторический марафон, посвящённый истории Нижнего Новгорода (Горького) в годы Великой Отечественной войны.</p>
+                    <p>Марафон объединяет образовательные, экскурсионные и интерактивные форматы. Участники знакомятся с историей города не только через лекции и презентации, но и непосредственно посещают исторические и промышленные площадки Нижнего Новгорода, участвуют в командных испытаниях и памятных мероприятиях.</p>
+                    <h4>Главная идея</h4>
+                    <p>Пройти по местам, связанным с историей города, узнать больше о его роли в годы Великой Отечественной войны и сохранить память о людях, благодаря которым Нижний Новгород стал частью общей истории Победы.</p>
+                </div>
+                <div>
+                    <h3>На что направлен марафон?</h3>
+                    <ul class="goal-list">
+                        <li><strong>Сохранение исторической памяти</strong> о событиях Великой Отечественной войны и вкладе Нижнего Новгорода.</li>
+                        <li><strong>Изучение истории родного города</strong> через знакомство с историческими местами, предприятиями и памятниками.</li>
+                        <li><strong>Знакомство с трудовым подвигом горьковчан</strong> и ролью города в годы войны.</li>
+                        <li><strong>Патриотическое просвещение молодёжи</strong> через образовательные, командные и практические форматы.</li>
+                        <li><strong>Живое обращение к истории</strong> через непосредственное посещение мест, связанных с военной историей города.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="why-nn">
+                <h3>Почему именно Нижний Новгород?</h3>
+                <p>В годы Великой Отечественной войны город Горький был одним из важных промышленных центров страны. Поэтому история города рассматривается в марафоне не только через военные события, но и через трудовой подвиг его жителей.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ЦЕЛИ ===== -->
+    <section class="bg-light">
+        <div class="container">
+            <div class="section-title"><h2>Цели марафона</h2></div>
+            <div class="grid-3">
+                <div class="card"><div class="card-icon">🔍</div><h4>Узнать</h4><p>больше об истории Нижнего Новгорода в годы Великой Отечественной войны.</p></div>
+                <div class="card"><div class="card-icon">👁</div><h4>Увидеть</h4><p>места и предприятия города, связанные с его военной историей.</p></div>
+                <div class="card"><div class="card-icon">💡</div><h4>Понять</h4><p>значение трудового подвига горьковчан.</p></div>
+                <div class="card"><div class="card-icon">🗺</div><h4>Исследовать</h4><p>историю через экскурсии, лекции, квесты и командные задания.</p></div>
+                <div class="card"><div class="card-icon">🕯</div><h4>Сохранить</h4><p>память о событиях и людях, связанных с историей города.</p></div>
+                <div class="card"><div class="card-icon">📢</div><h4>Поделиться</h4><p>своими знаниями и идеями в рамках презентации студенческих проектов.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ДЛЯ КОГО ===== -->
+    <section>
+        <div class="container">
+            <div class="section-title"><h2>Для кого марафон?</h2></div>
+            <div class="grid-2">
+                <div>
+                    <h3>Кто может стать участником?</h3>
+                    <p>Марафон рассчитан на студентов России и Республики Беларусь в возрасте от 18 до 25 лет.</p>
+                    <p>Участников ждут три дня образовательной и экскурсионной программы, командная работа, интеллектуальные испытания и знакомство с историей Нижнего Новгорода.</p>
+                </div>
+                <div>
+                    <h3>Что получает участник?</h3>
+                    <ul class="goal-list">
+                        <li>узнать больше об истории Нижнего Новгорода;</li>
+                        <li>посетить знаковые исторические и промышленные площадки города;</li>
+                        <li>принять участие в квизе и историческом квесте;</li>
+                        <li>работать в команде;</li>
+                        <li>представить собственный проект;</li>
+                        <li>познакомиться с другими студентами.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== КОГДА И ГДЕ ===== -->
+    <section class="bg-light">
+        <div class="container">
+            <div class="section-title"><h2>Когда и где?</h2></div>
+            <div style="text-align:center; max-width:700px; margin:0 auto;">
+                <h3 style="font-size:1.8rem;">24–26 мая 2027 года</h3>
+                <p style="font-size:1.3rem; font-weight:600; color:var(--blue-main);">Нижний Новгород</p>
+                <p>Марафон проходит на нескольких площадках города, связанных с образовательной, промышленной и исторической памятью.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== МАРШРУТ ===== -->
+    <section id="route">
+        <div class="container">
+            <div class="section-title"><h2>Маршрут марафона</h2></div>
+            <div class="grid-4">
+                <div class="card"><h4>НГЛУ</h4><p>Нижегородский государственный лингвистический университет им. Н. А. Добролюбова. Знакомство с университетом, музейная программа и открытие марафона.</p></div>
+                <div class="card"><h4>Завод «ГАЗ»</h4><p>Экскурсия познакомит участников с промышленной историей города и его ролью в годы Великой Отечественной войны.</p></div>
+                <div class="card"><h4>«Красное Сормово»</h4><p>Участники посетят музей завода и узнают об истории предприятия.</p></div>
+                <div class="card"><h4>Нижегородский кремль</h4><p>На территории Кремля пройдёт исторический квест, а также экскурсия и памятное мероприятие.</p></div>
+            </div>
+            <div class="route" style="margin-top:30px;">
+                <span>НГЛУ</span><span class="route-arrow">→</span>
+                <span>ГАЗ</span><span class="route-arrow">→</span>
+                <span>Красное Сормово</span><span class="route-arrow">→</span>
+                <span>Нижегородский кремль</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПРОГРАММА ===== -->
+    <section id="program" class="bg-light">
+        <div class="container">
+            <div class="section-title"><h2>Программа</h2></div>
+            <div class="day-block">
+                <h3>День 1 — Открытие и знакомство с городом</h3>
+                <div class="day-item"><span class="time">НГЛУ</span><span>Знакомство с университетом и музеем НГЛУ.</span></div>
+                <div class="day-item"><span class="time">Открытие</span><span>Торжественное открытие. Старт марафона и знакомство участников с программой.</span></div>
+                <div class="day-item"><span class="time">Лекция</span><span>Роль Нижнего Новгорода в годы Великой Отечественной войны.</span></div>
+                <div class="day-item"><span class="time">Завод «ГАЗ»</span><span>Экскурсия на предприятие.</span></div>
+                <div class="day-item"><span class="time">Экскурсия</span><span>Верхняя часть города. Экскурсия по исторической части Нижнего Новгорода.</span></div>
+            </div>
+            <div class="day-block">
+                <h3>День 2 — Промышленный и интеллектуальный блок</h3>
+                <div class="day-item"><span class="time">Музей</span><span>Музей завода «Красное Сормово». Экскурсия и знакомство с историей предприятия.</span></div>
+                <div class="day-item"><span class="time">Квиз</span><span>Исторический квиз. Проверяем знания об истории города и Великой Отечественной войне.</span></div>
+                <div class="day-item"><span class="time">Проекты</span><span>Презентация проектов команд. Участники представляют свои проекты, посвящённые сохранению исторической памяти.</span></div>
+                <div class="day-item"><span class="time">Квест</span><span>Исторический квест. Командное испытание на территории Нижегородского кремля.</span></div>
+            </div>
+            <div class="day-block">
+                <h3>День 3 — Память и наследие</h3>
+                <div class="day-item"><span class="time">Кремль</span><span>Экскурсия по территории Кремля.</span></div>
+                <div class="day-item"><span class="time">Митинг</span><span>Митинг-реквием. Памятное мероприятие в честь погибших.</span></div>
+                <div class="day-item"><span class="time">Цветы</span><span>Возложение цветов к Вечному огню.</span></div>
+                <div class="day-item"><span class="time">Закрытие</span><span>Итоги трёх дней, завершение программы и торжественная церемония закрытия.</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ЧТО БУДЕТ ===== -->
+    <section id="what">
+        <div class="container">
+            <div class="section-title"><h2>Что будет на марафоне?</h2></div>
+            <div class="grid-3">
+                <div class="card"><div class="card-icon">🎓</div><h4>Лекции</h4><p>История Нижнего Новгорода и его роль в годы Великой Отечественной войны.</p></div>
+                <div class="card"><div class="card-icon">🚌</div><h4>Экскурсии</h4><p>Посещение НГЛУ, «ГАЗ», музея «Красное Сормово» и Нижегородского кремля.</p></div>
+                <div class="card"><div class="card-icon">🧠</div><h4>Исторический квиз</h4><p>Интеллектуальное командное соревнование для всех, кто любит историю.</p></div>
+                <div class="card"><div class="card-icon">🗺</div><h4>Исторический квест</h4><p>Исследование территории Кремля через задания и командную работу.</p></div>
+                <div class="card"><div class="card-icon">📊</div><h4>Командные проекты</h4><p>Презентация студенческих проектов, посвящённых сохранению исторической памяти.</p></div>
+                <div class="card"><div class="card-icon">🕯</div><h4>Памятные мероприятия</h4><p>Митинг-реквием и возложение цветов к Вечному огню.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== РЕГИСТРАЦИЯ ===== -->
+    <section id="registration" class="bg-light">
+        <div class="container">
+            <div class="section-title"><h2>Регистрация участника</h2></div>
+            <div class="reg-form-box">
+                <form id="regForm">
+                    <div class="form-group">
+                        <label>Фамилия и имя *</label>
+                        <input type="text" name="name" required placeholder="Иванов Иван">
+                    </div>
+                    <div class="form-group">
+                        <label>Электронная почта *</label>
+                        <input type="email" name="email" required placeholder="example@mail.ru">
+                    </div>
+                    <div class="form-group">
+                        <label>Телефон *</label>
+                        <input type="tel" name="phone" required placeholder="+7 (___) ___-__-__">
+                    </div>
+                    <div class="form-group">
+                        <label>Возраст *</label>
+                        <input type="number" name="age" min="18" max="25" required placeholder="18–25">
+                    </div>
+                    <div class="form-group">
+                        <label>Город *</label>
+                        <input type="text" name="city" required placeholder="Нижний Новгород">
+                    </div>
+                    <div class="form-group">
+                        <label>Учебное заведение *</label>
+                        <input type="text" name="university" required placeholder="НГЛУ им. Н. А. Добролюбова">
+                    </div>
+                    <div class="form-group">
+                        <label>Курс *</label>
+                        <input type="number" name="course" min="1" max="6" required placeholder="1–6">
+                    </div>
+                    <div class="form-group">
+                        <label>Мотивация</label>
+                        <textarea name="motivation" rows="4" placeholder="Расскажите о своей мотивации..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Зарегистрироваться</button>
+                    <p id="formStatus" style="margin-top:15px; text-align:center; font-weight:600;"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== КОНТАКТЫ ===== -->
+    <section id="contacts">
+        <div class="container">
+            <div class="section-title"><h2>Контакты</h2></div>
+            <div class="grid-3">
+                <div class="contact-card">
+                    <h4>Шуйкина Ксения</h4>
+                    <p class="role">Руководитель проекта</p>
+                    <a href="mailto:ksusasujkina@gmail.com" class="contact-link">ksusasujkina@gmail.com</a>
+                    <a href="tel:+79535733766" class="contact-link">8 953 573-37-66</a>
+                </div>
+                <div class="contact-card">
+                    <h4>Ватутин Иван</h4>
+                    <p class="role">Наставник проекта</p>
+                    <a href="mailto:ivan51019@yandex.ru" class="contact-link">ivan51019@yandex.ru</a>
+                    <a href="tel:+79875306003" class="contact-link">8 987 530-60-03</a>
+                </div>
+                <div class="contact-card">
+                    <h4>Кохан</h4>
+                    <p class="role">Наставник проекта</p>
+                    <a href="mailto:kokhann@yandex.ru" class="contact-link">kokhann@yandex.ru</a>
+                </div>
+            </div>
+            <div class="email-box" style="max-width:600px; margin:30px auto 0;">
+                <p>По всем вопросам обращаться на почту:</p>
+                <a href="mailto:dorogamipamyatinn@mail.ru">dorogamipamyatinn@mail.ru</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ФУТЕР (без эмблемы) ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div>
+                    <div class="footer-brand">ДОРОГАМИ <span>ПАМЯТИ</span></div>
+                    <p>Молодёжный исторический марафон</p>
+                    <p>24–26 мая 2027 · Нижний Новгород</p>
+                </div>
+                <div>
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="#about">О марафоне</a></li>
+                        <li><a href="#program">Программа</a></li>
+                        <li><a href="#route">Маршрут</a></li>
+                        <li><a href="#registration">Регистрация</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><a href="mailto:dorogamipamyatinn@mail.ru">dorogamipamyatinn@mail.ru</a></li>
+                        <li><a href="mailto:ksusasujkina@gmail.com">ksusasujkina@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2027 Дорогами памяти · НГЛУ им. Н. А. Добролюбова
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== СКРИПТ ОТПРАВКИ В GOOGLE ТАБЛИЦУ ===== -->
+    <script>
+    document.getElementById('regForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const btn = document.getElementById('submitBtn');
+        const status = document.getElementById('formStatus');
+
+        btn.disabled = true;
+        btn.textContent = 'Отправка...';
+        status.textContent = '';
+
+        const formData = new FormData(this);
+        const data = {};
+        formData.forEach((value, key) => data[key] = value);
+
+        try {
+            await fetch('https://script.google.com/macros/s/AKfycbymbrep-vBE5eBMohOxUM8Za_eaR3_Zft6tpKjwy4-N1o38CD8bwicMD9oSG3kn94msJg/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            status.style.color = '#163a7a';
+            status.textContent = '✅ Спасибо! Ваша заявка отправлена.';
+            this.reset();
+        } catch (error) {
+            status.style.color = '#c0392b';
+            status.textContent = '❌ Ошибка отправки. Попробуйте ещё раз.';
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Зарегистрироваться';
+        }
+    });
+    </script>
+
+</body>
+</html>
